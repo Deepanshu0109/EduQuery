@@ -1,0 +1,149 @@
+/* Sidebar container */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  transition: width 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+  z-index: 100;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar.expanded {
+  width: 220px;
+}
+
+/* Project name / header */
+.sidebar-header {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.project-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1db954;
+  white-space: nowrap;
+}
+
+.sidebar.collapsed .project-name {
+  font-size: 1.2rem;
+}
+
+/* Toggle button */
+.toggle-btn {
+  font-size: 1.5rem;
+  padding: 1rem;
+  cursor: pointer;
+  color: #1db954;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.nav-items {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  color: #e0e0e0;
+  text-decoration: none;
+  border-radius: 8px;
+  margin: 0.3rem 0;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.nav-link:hover {
+  background-color: #2a2a2a;
+  transform: translateX(5px);
+}
+
+.nav-link.active {
+  background-color: #1db954;
+  color: #fff;
+}
+
+/* Icon styling */
+.icon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* When collapsed, center icons and hide text */
+.sidebar.collapsed .icon {
+  margin: 0 auto;
+}
+
+.sidebar.collapsed .link-text {
+  display: none;
+}
+
+/* Logout button */
+.logout-btn {
+  background: none;
+  border: none;
+  color: #ff4b5c;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #ff4b5c22;
+  color: #ff1f3a;
+}
+
+.auth-layout {
+  display: flex;
+}
+
+/* Content margin equal to collapsed sidebar width */
+.main-content {
+  flex: 1;
+  margin-left: 70px; /* space for collapsed sidebar */
+  padding: 2rem;
+  min-height: 100vh;
+  background-color: #121212;
+  transition: margin-left 0.3s ease;
+}
+
+/* Sidebar styles remain the same */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  transition: width 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+  z-index: 100;
+}
+
+.sidebar.collapsed {
+  width: 70px; /* collapsed width */
+}
+
+.sidebar.expanded {
+  width: 220px; /* expanded width */
+}
