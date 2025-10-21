@@ -1,0 +1,131 @@
+.ask-doubt-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start   ;
+  padding: 4rem 1rem;
+  min-height: calc(100vh - 70px);
+}
+
+.ask-doubt-container {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Form card */
+.ask-doubt-card {
+  background-color: #1a1a1a;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ask-doubt-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.ask-doubt-title {
+  font-size: 2rem;
+  color: #00bcd4;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.ask-doubt-error {
+  color: #ff4b5c;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.ask-doubt-form .form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.ask-doubt-form label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.ask-doubt-form input,
+.ask-doubt-form textarea,
+.ask-doubt-form select {
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background-color: #121212;
+  color: #e0e0e0;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.ask-doubt-form input:focus,
+.ask-doubt-form textarea:focus,
+.ask-doubt-form select:focus {
+  border-color: #00bcd4;
+  box-shadow: 0 0 8px rgba(0,188,212,0.5);
+}
+
+.ask-doubt-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Submit button */
+.ask-doubt-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #00bcd4;
+  color: #101010;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ask-doubt-btn:hover {
+  background-color: #00d0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,188,212,0.3);
+}
+
+/* Right-side image */
+.ask-doubt-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.ask-doubt-image img {
+    margin-top: 25%;
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.ask-doubt-image img:hover {
+  transform: scale(1.03);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .ask-doubt-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ask-doubt-image {
+    margin-top: 2rem;
+  }
+}

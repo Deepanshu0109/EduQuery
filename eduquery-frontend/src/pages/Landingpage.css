@@ -1,4 +1,6 @@
-/* General Reset */
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 .landing-page {
   font-family: 'Poppins', sans-serif;
   color: #e0e0e0;
@@ -9,17 +11,15 @@
 /* Hero Section */
 .hero-section {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   min-height: 100vh;
   padding: 2rem 5%;
-  background: linear-gradient(135deg, #1db954 0%, #121212 100%);
-  color: #fff;
-  position: relative;
-  overflow: hidden;
+  gap: 2rem;
 }
 
 .hero-content {
+  flex: 1;
   max-width: 600px;
   animation: fadeInLeft 1s ease forwards;
 }
@@ -28,11 +28,13 @@
   font-size: 4rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  color: #4dabf7;
 }
 
 .hero-tagline {
   font-size: 1.5rem;
   margin-bottom: 2rem;
+  color: #cccccc;
 }
 
 .hero-buttons .btn {
@@ -41,42 +43,45 @@
   border-radius: 8px;
   font-weight: 500;
   transition: all 0.3s ease;
-  cursor: pointer;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .btn-primary {
-  background-color: #1db954;
-  color: #fff;
+  background-color: #4dabf7;
+  color: #121212;
 }
 
 .btn-primary:hover {
-  background-color: #1ed760;
+  background-color: #3a90e0;
   transform: translateY(-3px);
 }
 
 .btn-secondary {
-  background-color: #2a2a2a;
-  color: #fff;
+  background-color: #2a2a3d;
+  color: #e0e0e0;
 }
 
 .btn-secondary:hover {
-  background-color: #3a3a3a;
+  background-color: #3a3a5a;
   transform: translateY(-3px);
 }
 
-/* Placeholder Image */
-.hero-image .image-placeholder {
-  width: 400px;
-  height: 300px;
-  background-color: #2a2a2a;
-  border-radius: 16px;
+/* Hero Image */
+.hero-image {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #888;
-  font-size: 1.2rem;
   animation: fadeInRight 1s ease forwards;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
 }
 
 /* Why Section */
@@ -88,17 +93,18 @@
 .why-section h2 {
   font-size: 2.5rem;
   margin-bottom: 3rem;
+  color: #4dabf7;
 }
 
 .why-cards {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
 }
 
 .why-cards .card {
-  background-color: #1e1e1e;
+  background-color: #1e1e2f;
   padding: 2rem;
   border-radius: 16px;
   width: 300px;
@@ -107,7 +113,7 @@
 
 .why-cards .card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 8px 20px rgba(30, 215, 96, 0.4);
+  box-shadow: 0 8px 20px rgba(77, 171, 247, 0.3);
 }
 
 /* About Section */
@@ -119,35 +125,38 @@
 .about-section h2 {
   font-size: 2.5rem;
   margin-bottom: 2rem;
+  color: #4dabf7;
 }
 
 .about-section p {
   max-width: 700px;
   margin: 0 auto;
   font-size: 1.2rem;
+  color: #cccccc;
 }
 
 /* Workflow Section */
 .workflow-section {
   padding: 6rem 5%;
   text-align: center;
-  background-color: #1e1e1e;
+  background-color: #1e1e2f;
 }
 
 .workflow-section h2 {
   font-size: 2.5rem;
   margin-bottom: 3rem;
+  color: #4dabf7;
 }
 
 .workflow-steps {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
 }
 
 .workflow-steps .step {
-  background-color: #2a2a2a;
+  background-color: #2a2a3d;
   border-radius: 16px;
   padding: 2rem;
   width: 250px;
@@ -156,13 +165,13 @@
 
 .workflow-steps .step:hover {
   transform: translateY(-10px);
-  box-shadow: 0 8px 20px rgba(30, 215, 96, 0.4);
+  box-shadow: 0 8px 20px rgba(77, 171, 247, 0.3);
 }
 
 .step-number {
   font-size: 2rem;
   font-weight: 700;
-  color: #1db954;
+  color: #4dabf7;
   margin-bottom: 1rem;
 }
 
@@ -183,4 +192,35 @@
 @keyframes fadeInRight {
   0% { opacity: 0; transform: translateX(50px); }
   100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-image {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .hero-tagline {
+    font-size: 1.2rem;
+  }
+
+  .why-cards, .workflow-steps {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .workflow-steps .step, .why-cards .card {
+    width: 100%;
+  }
 }

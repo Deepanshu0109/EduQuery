@@ -1,0 +1,135 @@
+.question-page {
+  padding: 2rem 1rem;
+  background-color: #121212;
+  min-height: calc(100vh - 70px);
+}
+
+.question-card {
+  background-color: #1e1e1e;
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+}
+
+.question-card:hover {
+  transform: translateY(-3px);
+}
+
+.question-body {
+  font-size: 1.1rem;
+  margin: 1rem 0;
+}
+
+.question-meta {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.question-actions button {
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.question-actions .delete-btn {
+  background-color: #ff4b5c;
+  color: #fff;
+}
+
+.question-actions .delete-btn:hover {
+  background-color: #ff1f3a;
+}
+
+.answers-list {
+  list-style: none;
+  padding: 0;
+}
+
+.answer-card {
+  background-color: #2a2a2a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease;
+}
+
+.answer-card:hover {
+  transform: translateY(-2px);
+}
+
+.answer-actions {
+  margin-top: 0.5rem;
+}
+
+.answer-actions button {
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color: #1db954;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.answer-actions button:hover {
+  background-color: #1ed760;
+}
+
+.answer-actions .delete-btn {
+  background-color: #ff4b5c;
+  color: #fff;
+}
+
+.answer-actions .delete-btn:hover {
+  background-color: #ff1f3a;
+}
+
+.answer-form-card {
+  background-color: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  margin-top: 2rem;
+}
+
+.answer-form-card textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  margin-bottom: 1rem;
+  resize: vertical;
+  min-height: 100px;
+  transition: all 0.3s ease;
+}
+
+.answer-form-card textarea:focus {
+  border-color: #1db954;
+  box-shadow: 0 0 8px rgba(30,215,96,0.5);
+  outline: none;
+}
+
+.answer-form-card button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #1db954;
+  color: #fff;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.answer-form-card button:hover {
+  background-color: #1ed760;
+  transform: translateY(-2px);
+}

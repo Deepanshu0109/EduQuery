@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from '../api/axios';
+import './Profile.css';
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
-  const userId = user?.id; // use normalized field from AuthContext
+  const userId = user?.id;
 
   const [profile, setProfile] = useState({
     name: '',
@@ -15,7 +16,6 @@ const Profile = () => {
   });
   const [message, setMessage] = useState('');
 
-  // Fetch user profile from backend
   useEffect(() => {
     if (!userId) return;
 
@@ -34,12 +34,10 @@ const Profile = () => {
     fetchProfile();
   }, [userId]);
 
-  // Handle input changes
   const handleChange = (e) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
 
-  // Update profile
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -48,7 +46,7 @@ const Profile = () => {
 
       const res = await axios.put(
         `/users/${userId}`,
-        { class: cls, semester, rollNumber }, // Only update editable fields
+        { class: cls, semester, rollNumber },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -61,35 +59,36 @@ const Profile = () => {
   };
 
   return (
-    <div>
-      <h1>Profile</h1>
-      {message && <p>{message}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input type="text" name="name" value={profile.name} disabled />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input type="email" name="email" value={profile.email} disabled />
-        </div>
-        <div>
-          <label>Class:</label>
-          <input type="text" name="class" value={profile.class} onChange={handleChange} />
-        </div>
-        <div>
-          <label>Semester:</label>
-          <input type="number" name="semester" value={profile.semester} onChange={handleChange} min="1" max="8" />
-        </div>
-        <div>
-          <label>Roll Number:</label>
-          <input type="text" name="rollNumber" value={profile.rollNumber} onChange={handleChange} />
-        </div>
-        <button type="submit">Save Changes</button>
-      </form>
+    <div className="profile-page">
+      <div className="profile-card">
+        <h1>Profile</h1>
+        {message && <p className="profile-message">{message}</p>}
+        <form onSubmit={handleSubmit} className="profile-form">
+          <div className="form-group">
+            <label>Name:</label>
+            <input type="text" name="name" value={profile.name} disabled />
+          </div>
+          <div className="form-group">
+            <label>Email:</label>
+            <input type="email" name="email" value={profile.email} disabled />
+          </div>
+          <div className="form-group">
+            <label>Class:</label>
+            <input type="text" name="class" value={profile.class} onChange={handleChange} />
+          </div>
+          <div className="form-group">
+            <label>Semester:</label>
+            <input type="number" name="semester" value={profile.semester} onChange={handleChange} min="1" max="8" />
+          </div>
+          <div className="form-group">
+            <label>Roll Number:</label>
+            <input type="text" name="rollNumber" value={profile.rollNumber} onChange={handleChange} />
+          </div>
+          <button type="submit" className="save-btn">Save Changes</button>
+        </form>
+      </div>
     </div>
   );
 };
 
 export default Profile;
-    

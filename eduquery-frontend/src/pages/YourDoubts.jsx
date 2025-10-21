@@ -1,8 +1,8 @@
-// src/pages/YourDoubts.jsx
 import { useState, useEffect, useContext } from 'react';
 import axios from '../api/axios';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import './YourDoubts.css';
 
 const YourDoubts = () => {
   const { user } = useContext(AuthContext);
@@ -34,19 +34,27 @@ const YourDoubts = () => {
   };
 
   if (loading) return <p>Loading your doubts...</p>;
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
+  if (error) return <p className="error-text">{error}</p>;
 
   return (
-    <div>
+    <div className="your-doubts-page">
       <h2>Your Doubts</h2>
-      {questions.length === 0 && <p>You haven't asked any doubts yet.</p>}
-      <ul>
-        {questions.map(q => (
-          <li key={q._id} onClick={() => openQuestion(q._id)} style={{ cursor: 'pointer', margin: '10px 0' }}>
-            <strong>{q.title}</strong> - <em>{q.subject?.name || 'No Subject'}</em>
-          </li>
-        ))}
-      </ul>
+      {questions.length === 0 ? (
+        <p>You haven't asked any doubts yet.</p>
+      ) : (
+        <div className="doubts-list">
+          {questions.map(q => (
+            <div
+              key={q._id}
+              className="doubt-card"
+              onClick={() => openQuestion(q._id)}
+            >
+              <h3>{q.title}</h3>
+              <p className="doubt-subject">{q.subject?.name || 'No Subject'}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

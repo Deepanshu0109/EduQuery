@@ -1,0 +1,116 @@
+.dashboard-page {
+  padding: 2rem;
+  color: #e0e0e0;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  color: #00bcd4;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-header p {
+  font-size: 1.1rem;
+  color: #cfd8dc;
+  margin-bottom: 2rem;
+}
+
+/* Features grid */
+.features-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background-color: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  flex: 1 1 180px;
+  min-width: 180px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,188,212,0.3);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #00bcd4;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Activity section */
+.activity-section {
+  margin-top: 3rem;
+}
+
+.activity-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #00bcd4;
+}
+
+.activity-list {
+  max-height: 250px;
+  overflow-y: auto;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding: 1rem;
+  list-style: none;
+}
+
+.activity-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #2c2c2c;
+  font-size: 0.95rem;
+}
+
+/* Tips section */
+.tips-section {
+  margin-top: 3rem;
+}
+
+.tips-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #00bcd4;
+}
+
+.tips-list {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.tips-list li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Scrollbar for activity */
+.activity-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.activity-list::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.activity-list::-webkit-scrollbar-thumb {
+  background-color: #00bcd4;
+  border-radius: 5px;
+}

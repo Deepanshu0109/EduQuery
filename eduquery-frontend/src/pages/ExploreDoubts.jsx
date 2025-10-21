@@ -1,9 +1,8 @@
-//src/pages/ExploreDoubts.jsx
-
 import { useState, useEffect, useContext } from "react";
 import axios from "../api/axios";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import './ExploreDoubts.css';
 
 const ExploreDoubts = () => {
   const { user } = useContext(AuthContext);
@@ -15,7 +14,6 @@ const ExploreDoubts = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Fetch subjects for filter
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
@@ -29,19 +27,14 @@ const ExploreDoubts = () => {
     fetchSubjects();
   }, []);
 
-  // Fetch questions excluding user's own
   const fetchQuestions = async (subjectId = "") => {
     setLoading(true);
     setError("");
     try {
       const res = await axios.get("/questions", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("eduqueryToken")}`,
-        },
+        headers: { Authorization: `Bearer ${localStorage.getItem("eduqueryToken")}` },
         params: { subjectId },
       });
-
-      // filter out user's own questions
       const filtered = res.data.filter(q => q.author._id !== user.id);
       setQuestions(filtered);
     } catch (err) {
@@ -52,7 +45,6 @@ const ExploreDoubts = () => {
     }
   };
 
-  // Fetch on mount and whenever subject changes
   useEffect(() => {
     fetchQuestions(selectedSubject);
   }, [selectedSubject]);
@@ -65,39 +57,44 @@ const ExploreDoubts = () => {
     navigate(`/questions/${id}`);
   };
 
-  if (loading) return <p>Loading doubts...</p>;
-  if (error) return <p>{error}</p>;
-
   return (
-    <div>
-      <h2>Explore Doubts</h2>
+    <div className="explore-doubts-page">
+      <h2 className="page-title">Explore Doubts</h2>
 
-      <div>
-        <label>Filter by Subject:</label>
-        <select value={selectedSubject} onChange={handleSubjectChange}>
+      <div className="filter-section">
+        <label htmlFor="subjectFilter">Filter by Subject:</label>
+        <select
+          id="subjectFilter"
+          value={selectedSubject}
+          onChange={handleSubjectChange}
+        >
           <option value="">All Subjects</option>
           {subjects.map((s) => (
-            <option key={s._id} value={s._id}>
-              {s.name}
-            </option>
+            <option key={s._id} value={s._id}>{s.name}</option>
           ))}
         </select>
       </div>
 
-      {questions.length === 0 ? (
-        <p>No doubts found.</p>
+      {loading ? (
+        <p className="status-text">Loading doubts...</p>
+      ) : error ? (
+        <p className="status-text error">{error}</p>
+      ) : questions.length === 0 ? (
+        <p className="status-text">No doubts found.</p>
       ) : (
-        <ul>
+        <div className="questions-grid">
           {questions.map((q) => (
-            <li
+            <div
               key={q._id}
+              className="question-card"
               onClick={() => openQuestion(q._id)}
-              style={{ cursor: "pointer", margin: "10px 0" }}
             >
-              <strong>{q.title}</strong> - <em>{q.subject?.name || "No Subject"}</em>
-            </li>
+              <h3>{q.title}</h3>
+              <p className="question-subject">{q.subject?.name || "No Subject"}</p>
+              <p className="question-author">By {q.author.name || "Unknown"}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

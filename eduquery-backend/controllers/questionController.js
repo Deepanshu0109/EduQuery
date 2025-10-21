@@ -54,14 +54,15 @@ exports.getAllQuestions = async (req, res) => {
 
 
 // GET /api/questions/mine
+// GET /api/questions/mine
 exports.getUserQuestions = async (req, res) => {
   try {
     const questions = await Question.find({ author: req.user._id })
       .populate([
         { path: 'author', select: 'name email' },
-        { path: 'subject', select: 'name' }
+        { path: 'subject', select: 'name' },
+        { path: 'answers.author', select: 'name email' }, // ✅ populate answer authors
       ])
-
       .sort({ createdAt: -1 });
     res.json(questions);
   } catch (err) {
@@ -69,6 +70,7 @@ exports.getUserQuestions = async (req, res) => {
     res.status(500).json({ message: 'Server error fetching user questions.' });
   }
 };
+
 
 
 
@@ -259,4 +261,6 @@ exports.toggleUpvote = async (req, res) => {
     res.status(500).json({ message: 'Server error toggling upvote.' });
   }
 };
+
+
 

@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import { AuthContext } from "../context/AuthContext";
+import './QuestionDetails.css';
 
 const QuestionDetails = () => {
   const { id } = useParams();
@@ -11,11 +12,8 @@ const QuestionDetails = () => {
   const [answerBody, setAnswerBody] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
-  // For managing which answer is in edit mode
   const [editingAnswers, setEditingAnswers] = useState({});
 
-  // 🔹 Fetch question and answers
   useEffect(() => {
     const fetchQuestion = async () => {
       try {
@@ -33,11 +31,9 @@ const QuestionDetails = () => {
     fetchQuestion();
   }, [id]);
 
-  // 🔹 Post new answer
   const handleAnswerSubmit = async (e) => {
     e.preventDefault();
     if (!answerBody) return;
-
     try {
       const res = await axios.post(
         `/questions/${id}/answers`,
@@ -52,12 +48,10 @@ const QuestionDetails = () => {
     }
   };
 
-  // 🔹 Edit and Delete question
-  const handleEditQuestion = () => navigate(`/ask-doubts/${id}`);
+  const handleEditQuestion = () => navigate(`/ask-doubt/${id}`);
 
   const handleDeleteQuestion = async () => {
     if (!window.confirm("Are you sure you want to delete this question?")) return;
-
     try {
       await axios.delete(`/questions/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("eduqueryToken")}` },
@@ -70,7 +64,6 @@ const QuestionDetails = () => {
     }
   };
 
-  // 🔹 Answer editing controls
   const startEditingAnswer = (answer) => {
     setEditingAnswers((prev) => ({
       ...prev,
@@ -101,7 +94,6 @@ const QuestionDetails = () => {
     }
   };
 
-  // 🔹 Delete answer
   const handleDeleteAnswer = async (answerId) => {
     if (!window.confirm("Are you sure you want to delete this answer?")) return;
     try {
@@ -118,17 +110,12 @@ const QuestionDetails = () => {
     }
   };
 
-  // 🔹 Like / Dislike (toggle)
   const handleToggleUpvote = async (answerId) => {
     try {
       const res = await axios.put(
         `/questions/${id}/answers/${answerId}/upvote`,
         {},
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("eduqueryToken")}`,
-          },
-        }
+        { headers: { Authorization: `Bearer ${localStorage.getItem("eduqueryToken")}` } }
       );
       setQuestion(res.data);
     } catch (err) {
@@ -140,40 +127,39 @@ const QuestionDetails = () => {
   if (error) return <p>{error}</p>;
   if (!question) return <p>Question not found.</p>;
 
-  // 🔹 Sort answers by like count (descending)
   const sortedAnswers = [...question.answers].sort(
     (a, b) => b.upvotes.length - a.upvotes.length
   );
 
   return (
-    <div>
-      <h2>{question.title}</h2>
-      <p>
-        {question.body}
-        {question.updatedAt && question.updatedAt !== question.createdAt && <span> (edited)</span>}
-      </p>
-      <p>Subject: {question.subject?.name || "No Subject"}</p>
-      <p>Asked by: {question.author?.name || "Unknown"}</p>
+    <div className="question-page">
+      <div className="question-card">
+        <h2>{question.title}</h2>
+        <p className="question-body">
+          {question.body}
+          {question.updatedAt && question.updatedAt !== question.createdAt && <span> (edited)</span>}
+        </p>
+        <p className="question-meta">
+          Subject: {question.subject?.name || "No Subject"} | Asked by: {question.author?.name || "Unknown"}
+        </p>
+        {user?.id === question.author?._id && (
+          <div className="question-actions">
+            <button onClick={handleEditQuestion}>Edit</button>
+            <button className="delete-btn" onClick={handleDeleteQuestion}>Delete</button>
+          </div>
+        )}
+      </div>
 
-      {user?.id === question.author?._id && (
-        <div>
-          <button onClick={handleEditQuestion}>Edit</button>
-          <button onClick={handleDeleteQuestion}>Delete</button>
-        </div>
-      )}
-
-      <hr />
       <h3>Answers</h3>
-
-      {sortedAnswers.length === 0 && <p>No answers yet.</p>}
-      <ul>
+      <ul className="answers-list">
+        {sortedAnswers.length === 0 && <p>No answers yet.</p>}
         {sortedAnswers.map((a) => {
           const isAuthor = user?.id === a.author?._id;
           const hasUpvoted = a.upvotes.includes(user?.id);
           const editingState = editingAnswers[a._id] || { editing: false, body: a.body };
 
           return (
-            <li key={a._id}>
+            <li key={a._id} className="answer-card">
               {editingState.editing ? (
                 <div>
                   <textarea
@@ -190,22 +176,19 @@ const QuestionDetails = () => {
                 </div>
               ) : (
                 <div>
-                  <p>
-                    {a.body}
-                    {a.updatedAt && a.updatedAt !== a.createdAt && <span> (edited)</span>}
-                  </p>
+                  <p>{a.body}{a.updatedAt && a.updatedAt !== a.createdAt && <span> (edited)</span>}</p>
                   <small>by {a.author?.name || "Unknown"}</small>
-                  <div>
+                  <div className="answer-actions">
                     <button onClick={() => handleToggleUpvote(a._id)}>
                       {hasUpvoted ? "Dislike" : "Like"} ({a.upvotes.length})
                     </button>
+                    {isAuthor && (
+                      <>
+                        <button onClick={() => startEditingAnswer(a)}>Edit</button>
+                        <button className="delete-btn" onClick={() => handleDeleteAnswer(a._id)}>Delete</button>
+                      </>
+                    )}
                   </div>
-                  {isAuthor && (
-                    <div>
-                      <button onClick={() => startEditingAnswer(a)}>Edit</button>
-                      <button onClick={() => handleDeleteAnswer(a._id)}>Delete</button>
-                    </div>
-                  )}
                 </div>
               )}
             </li>
@@ -213,16 +196,17 @@ const QuestionDetails = () => {
         })}
       </ul>
 
-      <hr />
-      <form onSubmit={handleAnswerSubmit}>
-        <textarea
-          placeholder="Your answer..."
-          value={answerBody}
-          onChange={(e) => setAnswerBody(e.target.value)}
-          required
-        />
-        <button type="submit">Post Answer</button>
-      </form>
+      <div className="answer-form-card">
+        <form onSubmit={handleAnswerSubmit}>
+          <textarea
+            placeholder="Your answer..."
+            value={answerBody}
+            onChange={(e) => setAnswerBody(e.target.value)}
+            required
+          />
+          <button type="submit">Post Answer</button>
+        </form>
+      </div>
     </div>
   );
 };

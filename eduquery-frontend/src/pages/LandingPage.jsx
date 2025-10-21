@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './LandingPage.css'; 
-
+import landing from '../assets/landing page.png';
 const LandingPage = () => {
   return (
     <div className="landing-page">
@@ -17,7 +17,7 @@ const LandingPage = () => {
         </div>
         <div className="hero-image">
           {/* Placeholder image */}
-          <div className="image-placeholder">Your Image Here</div>
+          <img src={landing} alt="collaborate" />
         </div>
       </section>
 

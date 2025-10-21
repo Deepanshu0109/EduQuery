@@ -1,7 +1,7 @@
 /* Import Poppins font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* Reset some default styles */
+/* Reset default styles */
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +11,7 @@
 
 html, body {
   height: 100%;
-  background-color: #121212; /* dark background */
+  background-color: #101010; /* dark background */
   color: #e0e0e0; /* light text for contrast */
   line-height: 1.6;
   scroll-behavior: smooth;
@@ -19,13 +19,13 @@ html, body {
 
 /* Links */
 a {
-  color: #1db954; /* bright accent color */
+  color: #00bcd4; /* cyan accent color */
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 a:hover {
-  color: #1ed760;
+  color: #26c6da;
 }
 
 /* Headings */
@@ -38,15 +38,15 @@ h1, h2, h3, h4, h5, h6 {
 /* Paragraphs */
 p {
   font-weight: 400;
-  color: #cccccc;
+  color: #cfd8dc; /* soft gray */
   margin-bottom: 1rem;
 }
 
 /* Buttons */
 button {
   font-family: 'Poppins', sans-serif;
-  background-color: #1db954;
-  color: #fff;
+  background-color: #00bcd4; /* cyan */
+  color: #101010; 
   padding: 0.6rem 1.2rem;
   border: none;
   border-radius: 8px;
@@ -56,14 +56,14 @@ button {
 }
 
 button:hover {
-  background-color: #1ed760;
+  background-color: #26c6da;
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(30, 215, 96, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
 }
 
 /* Inputs & Textareas */
 input, textarea, select {
-  background-color: #1e1e1e;
+  background-color: #1a1a1a;
   color: #e0e0e0;
   border: 1px solid #333;
   border-radius: 6px;
@@ -73,8 +73,8 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: #1db954;
-  box-shadow: 0 0 8px rgba(30, 215, 96, 0.5);
+  border-color: #00bcd4;
+  box-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
 }
 
 /* Containers */
@@ -87,7 +87,7 @@ input:focus, textarea:focus, select:focus {
 
 /* Cards */
 .card {
-  background-color: #1e1e1e;
+  background-color: #1a1a1a;
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
@@ -105,13 +105,13 @@ input:focus, textarea:focus, select:focus {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1e1e1e;
+  background: #1a1a1a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #1db954;
+  background-color: #00bcd4;
   border-radius: 5px;
-  border: 2px solid #1e1e1e;
+  border: 2px solid #1a1a1a;
 }
 
 /* Utility classes */

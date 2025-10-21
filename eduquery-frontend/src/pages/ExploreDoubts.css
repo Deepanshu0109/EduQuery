@@ -1,0 +1,88 @@
+.explore-doubts-page {
+  padding: 2rem 3%;
+  min-height: calc(100vh - 70px);
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #00bcd4;
+  text-align: center;
+}
+
+/* Filter section */
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.filter-section select {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-section select:focus {
+  border-color: #00bcd4;
+  box-shadow: 0 0 8px rgba(0,188,212,0.5);
+}
+
+/* Status text */
+.status-text {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+
+.status-text.error {
+  color: #ff4b5c;
+}
+
+/* Questions grid */
+.questions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Question card */
+.question-card {
+  background-color: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.question-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+
+.question-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #00bcd4;
+}
+
+.question-subject {
+  font-size: 0.95rem;
+  color: #a0a0a0;
+  margin-bottom: 0.5rem;
+}
+
+.question-author {
+  font-size: 0.85rem;
+  color: #888;
+}
