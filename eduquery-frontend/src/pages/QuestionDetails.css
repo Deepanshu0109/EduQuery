@@ -1,135 +1,257 @@
+/* --- Page Container --- */
 .question-page {
-  padding: 2rem 1rem;
-  background-color: #121212;
-  min-height: calc(100vh - 70px);
+  padding: 3rem 2.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  animation: fadeIn 0.4s ease-out;
 }
 
+/* --- Main Question Card --- */
 .question-card {
-  background-color: #1e1e1e;
-  padding: 2rem;
-  border-radius: 16px;
-  margin-bottom: 2rem;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-  transition: transform 0.3s ease;
+  background: var(--bg-surface-light);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: var(--border-radius-md);
+  padding: 2.5rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 229, 255, 0.05);
+  margin-bottom: 3rem;
+  position: relative;
 }
 
-.question-card:hover {
-  transform: translateY(-3px);
+/* Cyber accent at top-left */
+.question-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 40px;
+  height: 40px;
+  border-top: 3px solid var(--primary);
+  border-left: 3px solid var(--primary);
+  box-shadow: -5px -5px 15px rgba(0, 229, 255, 0.2);
+}
+
+.question-card h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  text-shadow: var(--glow-cyan);
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
 }
 
 .question-body {
   font-size: 1.1rem;
-  margin: 1rem 0;
+  line-height: 1.8;
+  color: #E2E8F0;
+  margin-bottom: 1.5rem;
+  white-space: pre-wrap; /* Keeps formatting of the text */
+}
+
+.question-body span, .answer-card p span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
 }
 
 .question-meta {
-  color: #888;
   font-size: 0.9rem;
+  color: var(--secondary); /* Neon Pink for meta info */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 1rem;
 }
 
-.question-actions button {
-  margin-right: 0.5rem;
+/* --- Action Buttons (Edit/Delete) --- */
+.question-actions, .answer-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.question-actions button, .answer-actions button, .answer-card > div > button {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
   padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: none;
+  border-radius: var(--border-radius-sm);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.question-actions .delete-btn {
-  background-color: #ff4b5c;
-  color: #fff;
+.question-actions button:hover, .answer-actions button:hover, .answer-card > div > button:hover {
+  background: rgba(0, 229, 255, 0.1);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-2px);
 }
 
-.question-actions .delete-btn:hover {
-  background-color: #ff1f3a;
+/* Danger / Delete Button */
+.question-actions .delete-btn, .answer-actions .delete-btn {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.question-actions .delete-btn:hover, .answer-actions .delete-btn:hover {
+  background: rgba(255, 0, 85, 0.1);
+  box-shadow: var(--glow-pink);
+}
+
+/* --- Answers Section --- */
+.question-page > h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.question-page > h3::before {
+  content: '';
+  display: block;
+  width: 15px;
+  height: 15px;
+  background: var(--secondary);
+  box-shadow: var(--glow-pink);
 }
 
 .answers-list {
   list-style: none;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
 }
 
+/* --- Individual Answer Card --- */
 .answer-card {
-  background-color: #2a2a2a;
-  padding: 1.5rem;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  transition: transform 0.3s ease;
-}
-
-.answer-card:hover {
-  transform: translateY(-2px);
-}
-
-.answer-actions {
-  margin-top: 0.5rem;
-}
-
-.answer-actions button {
-  margin-right: 0.5rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  background-color: #1db954;
-  color: #fff;
+  background: var(--bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 3px solid var(--secondary); /* Pink left border for answers */
+  border-radius: var(--border-radius-sm);
+  padding: 1.8rem;
+  position: relative;
   transition: all 0.3s ease;
 }
 
-.answer-actions button:hover {
-  background-color: #1ed760;
+.answer-card:hover {
+  background: var(--bg-surface-light);
+  border-color: rgba(255, 0, 85, 0.2);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4), var(--glow-pink);
 }
 
-.answer-actions .delete-btn {
-  background-color: #ff4b5c;
-  color: #fff;
+.answer-card p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #D1D5DB;
+  margin-bottom: 1rem;
+  white-space: pre-wrap;
 }
 
-.answer-actions .delete-btn:hover {
-  background-color: #ff1f3a;
+.answer-card small {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
 }
 
+/* --- Edit Answer Textarea --- */
+.answer-card textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 1rem;
+  background: var(--bg-base);
+  border: 1px solid var(--primary);
+  color: var(--text-main);
+  border-radius: var(--border-radius-sm);
+  font-family: 'Outfit', sans-serif;
+  margin-bottom: 1rem;
+  resize: vertical;
+}
+
+.answer-card textarea:focus {
+  outline: none;
+  box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.1), var(--glow-cyan);
+}
+
+/* --- Post New Answer Form --- */
 .answer-form-card {
-  background-color: #1e1e1e;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  margin-top: 2rem;
+  background: var(--bg-surface-light);
+  border: 1px dashed rgba(0, 229, 255, 0.3);
+  border-radius: var(--border-radius-md);
+  padding: 2rem;
+  transition: border-color 0.3s ease;
+}
+
+.answer-form-card:focus-within {
+  border-color: var(--primary);
+  border-style: solid;
+  box-shadow: var(--glow-cyan);
 }
 
 .answer-form-card textarea {
   width: 100%;
-  padding: 0.8rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #333;
-  background-color: #2a2a2a;
-  color: #e0e0e0;
-  margin-bottom: 1rem;
+  min-height: 120px;
+  padding: 1.2rem;
+  background: var(--bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  border-radius: var(--border-radius-sm);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
   resize: vertical;
-  min-height: 100px;
+  margin-bottom: 1rem;
   transition: all 0.3s ease;
 }
 
 .answer-form-card textarea:focus {
-  border-color: #1db954;
-  box-shadow: 0 0 8px rgba(30,215,96,0.5);
   outline: none;
+  border-color: var(--primary);
+  background: var(--bg-base);
 }
 
 .answer-form-card button {
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
+  background-color: var(--primary);
+  color: var(--text-dark);
   border: none;
+  padding: 1rem 2rem;
+  border-radius: var(--border-radius-sm);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   cursor: pointer;
-  background-color: #1db954;
-  color: #fff;
-  font-weight: 500;
+  box-shadow: var(--glow-cyan);
   transition: all 0.3s ease;
 }
 
 .answer-form-card button:hover {
-  background-color: #1ed760;
+  background-color: #FFFFFF;
+  box-shadow: var(--glow-cyan-strong);
   transform: translateY(-2px);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .question-page {
+    padding: 2rem 1rem;
+  }
+  
+  .question-card, .answer-card, .answer-form-card {
+    padding: 1.5rem;
+  }
 }

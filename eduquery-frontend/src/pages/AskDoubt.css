@@ -1,131 +1,209 @@
+/* --- Page Container --- */
 .ask-doubt-page {
+  padding: 3rem 2rem;
   display: flex;
   justify-content: center;
-  align-items: flex-start   ;
-  padding: 4rem 1rem;
-  min-height: calc(100vh - 70px);
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  animation: fadeIn 0.5s ease-out;
 }
 
+/* --- Two-Column Layout --- */
 .ask-doubt-container {
   display: flex;
-  gap: 3rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4rem;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
 }
 
-/* Form card */
+/* --- Form Card (The Terminal) --- */
 .ask-doubt-card {
-  background-color: #1a1a1a;
-  padding: 2rem 2.5rem;
-  border-radius: 16px;
+  flex: 1;
+  max-width: 650px;
+  background: var(--bg-surface-light);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: var(--border-radius-md);
+  padding: 3rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 229, 255, 0.05);
+  position: relative;
+}
+
+/* Cyber Accent Line at the Top */
+.ask-doubt-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 480px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 3px;
+  background: var(--primary);
+  box-shadow: var(--glow-cyan-strong);
 }
 
-.ask-doubt-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
+/* --- Typography --- */
 .ask-doubt-title {
-  font-size: 2rem;
-  color: #00bcd4;
-  margin-bottom: 1rem;
-  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-main);
+  text-shadow: var(--glow-cyan);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* --- Error Message --- */
 .ask-doubt-error {
-  color: #ff4b5c;
-  margin-bottom: 1rem;
-  text-align: center;
+  background: rgba(255, 0, 85, 0.1);
+  border-left: 3px solid var(--danger);
+  color: var(--danger);
+  padding: 1rem;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-shadow: 0 0 5px rgba(255, 0, 85, 0.3);
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+  animation: glitch 0.3s ease-in-out;
 }
 
-.ask-doubt-form .form-group {
-  margin-bottom: 1.5rem;
+/* --- Form Fields --- */
+.ask-doubt-form {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
 }
 
-.ask-doubt-form label {
-  margin-bottom: 0.5rem;
-  font-weight: 500;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
-.ask-doubt-form input,
-.ask-doubt-form textarea,
-.ask-doubt-form select {
-  padding: 0.8rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #333;
-  background-color: #121212;
-  color: #e0e0e0;
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  background: var(--bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  border-radius: var(--border-radius-sm);
+  font-family: 'Outfit', sans-serif;
   font-size: 1rem;
   transition: all 0.3s ease;
 }
 
-.ask-doubt-form input:focus,
-.ask-doubt-form textarea:focus,
-.ask-doubt-form select:focus {
-  border-color: #00bcd4;
-  box-shadow: 0 0 8px rgba(0,188,212,0.5);
+.form-group textarea {
+  min-height: 150px;
+  resize: vertical; /* Allow vertical resizing only */
+  line-height: 1.6;
 }
 
-.ask-doubt-form textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-/* Submit button */
-.ask-doubt-btn {
-  width: 100%;
-  padding: 0.8rem;
-  background-color: #00bcd4;
-  color: #101010;
-  font-weight: 600;
-  border-radius: 8px;
-  border: none;
+.form-group select {
   cursor: pointer;
-  transition: all 0.3s ease;
+  appearance: none; /* Removes default browser styling for a cleaner look */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300E5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+.form-group select option {
+  background-color: var(--bg-surface-light);
+  color: var(--text-main);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--bg-base);
+  box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.1), 0 0 0 1px var(--primary);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+/* --- Submit Button --- */
+.ask-doubt-btn {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--primary);
+  color: var(--text-dark);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  box-shadow: var(--glow-cyan);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .ask-doubt-btn:hover {
-  background-color: #00d0f0;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0,188,212,0.3);
+  background-color: #FFFFFF;
+  box-shadow: var(--glow-cyan-strong);
+  transform: translateY(-3px);
 }
 
-/* Right-side image */
+/* --- Illustration Area --- */
 .ask-doubt-image {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 400px;
-  width: 100%;
 }
 
 .ask-doubt-image img {
-    margin-top: 25%;
   width: 100%;
-  transition: transform 0.3s ease;
+  max-width: 450px;
+  border-radius: var(--border-radius-md);
+  filter: drop-shadow(0 0 30px rgba(0, 229, 255, 0.2));
+  animation: floatIllustration 6s ease-in-out infinite;
 }
 
-.ask-doubt-image img:hover {
-  transform: scale(1.03);
+@keyframes floatIllustration {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
 }
 
-/* Responsive */
-@media (max-width: 900px) {
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
   .ask-doubt-container {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column-reverse; /* Put image on top of form on smaller screens */
+    gap: 2rem;
   }
 
-  .ask-doubt-image {
-    margin-top: 2rem;
+  .ask-doubt-image img {
+    max-width: 300px; /* Make image smaller on tablets/phones */
+  }
+}
+
+@media (max-width: 768px) {
+  .ask-doubt-page {
+    padding: 1rem;
+  }
+
+  .ask-doubt-card {
+    padding: 2rem 1.5rem;
   }
 }

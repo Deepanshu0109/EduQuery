@@ -1,226 +1,266 @@
-/* Import Poppins font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
+/* --- Landing Page Container --- */
 .landing-page {
-  font-family: 'Poppins', sans-serif;
-  color: #e0e0e0;
-  background-color: #121212;
-  line-height: 1.6;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  /* Background index.css se aayega */
 }
 
-/* Hero Section */
+/* --- Typography & Global Sections --- */
+section {
+  padding: 6rem 10%;
+  position: relative;
+  z-index: 1;
+}
+
+section h2 {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 4rem;
+  color: var(--text-main);
+  text-shadow: var(--glow-cyan);
+}
+
+/* --- Hero Section --- */
 .hero-section {
+  min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 100vh;
-  padding: 2rem 5%;
-  gap: 2rem;
+  gap: 3rem;
+  padding-top: 8rem;
 }
 
 .hero-content {
   flex: 1;
-  max-width: 600px;
-  animation: fadeInLeft 1s ease forwards;
+  max-width: 650px;
 }
 
+/* Hollow text effect for the main title */
 .hero-title {
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #4dabf7;
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--primary);
+  text-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+  letter-spacing: 2px;
 }
 
 .hero-tagline {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  color: #cccccc;
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 1.6;
 }
 
-.hero-buttons .btn {
-  padding: 0.8rem 1.8rem;
-  margin-right: 1rem;
-  border-radius: 8px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  cursor: pointer;
+.hero-buttons {
+  display: flex;
+  gap: 1.5rem;
 }
 
-.btn-primary {
-  background-color: #4dabf7;
-  color: #121212;
-}
-
-.btn-primary:hover {
-  background-color: #3a90e0;
-  transform: translateY(-3px);
-}
-
-.btn-secondary {
-  background-color: #2a2a3d;
-  color: #e0e0e0;
-}
-
-.btn-secondary:hover {
-  background-color: #3a3a5a;
-  transform: translateY(-3px);
-}
-
-/* Hero Image */
 .hero-image {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeInRight 1s ease forwards;
+  position: relative;
 }
 
+/* Hover and Float Effect for the Image */
 .hero-image img {
   width: 100%;
-  max-width: 500px;
-  border-radius: 16px;
-  object-fit: cover;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  max-width: 550px;
+  border: var(--border-neon);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--glow-cyan-strong);
+  animation: cyberFloat 6s ease-in-out infinite;
+  /* Ek slight dark filter taaki bright images dark theme mein chubein nahi */
+  filter: brightness(0.9) contrast(1.1); 
 }
 
-/* Why Section */
-.why-section {
-  padding: 6rem 5%;
-  text-align: center;
+@keyframes cyberFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { 
+    transform: translateY(-15px) rotate(1.5deg); 
+    box-shadow: var(--glow-pink); 
+    border-color: rgba(255, 0, 85, 0.5); 
+  }
 }
 
-.why-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  color: #4dabf7;
-}
-
+/* --- Why EduQuery Cards --- */
 .why-cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
 }
 
-.why-cards .card {
-  background-color: #1e1e2f;
-  padding: 2rem;
-  border-radius: 16px;
-  width: 300px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.why-cards .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 20px rgba(77, 171, 247, 0.3);
-}
-
-/* About Section */
-.about-section {
-  padding: 6rem 5%;
+.card {
+  background: var(--bg-surface-light);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius-sm);
+  padding: 3rem 2rem;
   text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
 }
 
-.about-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: #4dabf7;
+/* Top border glowing animation on hover */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(0, 229, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), var(--glow-cyan);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.card p {
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+/* --- About Section --- */
+.about-section {
+  background: var(--bg-surface);
+  border-top: var(--border-neon);
+  border-bottom: 1px solid rgba(255, 0, 85, 0.3); /* Neon Pink border neeche ki taraf */
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+  margin: 4rem 0;
 }
 
 .about-section p {
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
-  font-size: 1.2rem;
-  color: #cccccc;
-}
-
-/* Workflow Section */
-.workflow-section {
-  padding: 6rem 5%;
+  font-size: 1.25rem;
+  color: var(--text-main);
+  line-height: 1.8;
   text-align: center;
-  background-color: #1e1e2f;
+  font-weight: 300;
 }
 
-.workflow-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  color: #4dabf7;
-}
-
+/* --- Workflow Steps --- */
 .workflow-steps {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3.5rem;
+  margin-top: 5rem;
 }
 
-.workflow-steps .step {
-  background-color: #2a2a3d;
-  border-radius: 16px;
-  padding: 2rem;
-  width: 250px;
-  transition: transform 0.3s, box-shadow 0.3s;
+.step {
+  background: var(--bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 3.5rem 2rem 2.5rem;
+  text-align: center;
+  position: relative;
+  border-radius: var(--border-radius-sm);
+  transition: border-color 0.3s ease;
 }
 
-.workflow-steps .step:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 20px rgba(77, 171, 247, 0.3);
+.step:hover {
+  border-color: rgba(255, 0, 85, 0.3);
 }
 
 .step-number {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #4dabf7;
-  margin-bottom: 1rem;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-base);
+  color: var(--secondary); /* Neon Pink text */
+  border: 2px solid var(--secondary);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 900;
+  border-radius: 4px; /* Boxy, sharp shape */
+  box-shadow: var(--glow-pink);
+  text-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
 }
 
-/* Footer */
+.step h3 {
+  color: var(--text-main);
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.step p {
+  color: var(--text-muted);
+}
+
+/* --- Footer --- */
 .landing-footer {
   text-align: center;
   padding: 2rem;
-  background-color: #121212;
-  color: #888;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
-/* Animations */
-@keyframes fadeInLeft {
-  0% { opacity: 0; transform: translateX(-50px); }
-  100% { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes fadeInRight {
-  0% { opacity: 0; transform: translateX(50px); }
-  100% { opacity: 1; transform: translateX(0); }
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
   .hero-section {
     flex-direction: column;
     text-align: center;
+    padding-top: 6rem;
   }
 
-  .hero-image {
-    margin-top: 2rem;
+  .hero-title {
+    font-size: 3.5rem;
+  }
+
+  .hero-buttons {
+    justify-content: center;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  section {
+    padding: 4rem 5%;
+  }
+
   .hero-title {
-    font-size: 3rem;
+    font-size: 2.8rem;
+    -webkit-text-stroke: 1px var(--primary);
   }
 
-  .hero-tagline {
-    font-size: 1.2rem;
-  }
-
-  .why-cards, .workflow-steps {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .workflow-steps .step, .why-cards .card {
-    width: 100%;
+  section h2 {
+    font-size: 2.2rem;
   }
 }
