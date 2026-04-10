@@ -5,7 +5,6 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  /* Ek subtle radial glow centre mein jisse focus card par rahe */
   background: radial-gradient(circle at center, rgba(0, 229, 255, 0.04) 0%, transparent 60%);
 }
 
@@ -23,7 +22,6 @@
   backdrop-filter: blur(10px);
 }
 
-/* Top accent glowing line */
 .auth-card::before {
   content: '';
   position: absolute;
@@ -119,14 +117,21 @@
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.auth-btn:hover {
+.auth-btn:hover:not(:disabled) {
   background-color: #FFFFFF;
   box-shadow: var(--glow-cyan-strong);
   transform: translateY(-3px);
 }
 
-.auth-btn:active {
+.auth-btn:active:not(:disabled) {
   transform: translateY(1px);
+}
+
+.auth-btn:disabled {
+  background-color: #555;
+  color: #888;
+  box-shadow: none;
+  cursor: not-allowed;
 }
 
 /* --- Footer Links --- */
@@ -150,4 +155,84 @@
 .auth-footer a:hover {
   color: #FFFFFF;
   text-shadow: var(--glow-cyan);
+}
+
+
+
+.auth-success {
+  background: rgba(76, 175, 80, 0.1);
+  border-left: 3px solid #4caf50;
+  color: #4caf50;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.google-btn-wrapper {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.otp-verification-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.email-display {
+  color: #ccc;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.email-display strong {
+  color: #fff;
+  font-size: 1rem;
+  display: block;
+  margin-top: 5px;
+}
+
+.resend-btn-wrapper {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.text-btn {
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.text-btn.active {
+  color: #4caf50;
+  text-decoration: underline;
+}
+
+.text-btn.disabled {
+  color: #888;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.secondary-btn {
+  margin-top: 15px;
+  background: transparent;
+  border: 1px solid #555;
+  color: #aaa;
+  padding: 10px;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  width: 100%;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.secondary-btn:hover {
+  color: #fff;
+  border-color: #888;
 }

@@ -27,6 +27,7 @@ const Login = () => {
       <div className="auth-card">
         <h2 className="auth-title">Login</h2>
         {error && <p className="auth-error">{error}</p>}
+        
         <form onSubmit={handleSubmit} className="auth-form">
           <input
             type="email"
@@ -44,6 +45,7 @@ const Login = () => {
           />
           <button type="submit" className="auth-btn">Login</button>
         </form>
+
         <p className="auth-footer">
           Don't have an account? <Link to="/register">Register</Link>
         </p>
