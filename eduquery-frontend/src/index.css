@@ -1,182 +1,181 @@
-/* Using 'Outfit' for a very sharp, modern, geometric look */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap');
+/* ============================================================
+   EduQuery — global tokens, reset, and shared building blocks
+   Design concept: a doubt-solving corkboard — students pin
+   questions and notes on a study-room board.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Karla:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* High-Contrast Core Colors */
-  --bg-base: #07070A; /* Pure deep dark */
-  --bg-surface: #12121A; /* Slightly lighter for cards */
-  --bg-surface-light: #1A1A24;
-  
-  --primary: #00E5FF; /* Cyber Cyan */
-  --primary-hover: #00B3CC;
-  --secondary: #FF0055; /* Neon Pink */
-  
-  --success: #00FF66;
-  --warning: #FFB300;
-  --danger: #FF0055;
+  /* Corkboard surface */
+  --cork: #6b5240;
+  --cork-deep: #40301f;
+  --cork-shadow: #2b2015;
 
-  /* Text Colors */
-  --text-main: #FFFFFF;
-  --text-muted: #8A8A9E;
-  --text-dark: #07070A; /* For text inside neon buttons */
+  /* Paper / pinned-note surfaces */
+  --paper: #f6efdc;
+  --paper-warm: #eee1c2;
 
-  /* Structural & Effects */
-  --border-neon: 1px solid rgba(0, 229, 255, 0.3);
-  --border-radius-sm: 4px; /* Sharper corners */
-  --border-radius-md: 8px;
-  --border-radius-lg: 16px;
-  
-  --glow-cyan: 0 0 15px rgba(0, 229, 255, 0.2);
-  --glow-cyan-strong: 0 0 25px rgba(0, 229, 255, 0.4);
-  --glow-pink: 0 0 15px rgba(255, 0, 85, 0.2);
+  /* Ink */
+  --ink: #2b2118;
+  --ink-soft: #6d5c49;
+
+  /* Accents */
+  --pin-red: #a8402f;
+  --pin-red-dark: #8a3226;
+  --marker: #d9a441;
+  --sage: #7c9179;
+
+  --rule: rgba(43, 33, 24, 0.16);
+  --shadow-card: 0 10px 20px rgba(20, 14, 8, 0.35);
 }
 
-/* Base Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  font-family: 'Outfit', sans-serif;
-  background-color: var(--bg-base);
-  color: var(--text-main);
+  font-family: 'Karla', sans-serif;
+  color: var(--ink);
   min-height: 100vh;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  /* Very subtle grid pattern in the background for a techy feel */
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 30px 30px;
+
+  background-color: var(--cork);
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(0, 0, 0, 0.14) 0%, transparent 42%),
+    radial-gradient(circle at 82% 76%, rgba(0, 0, 0, 0.12) 0%, transparent 46%),
+    radial-gradient(rgba(0, 0, 0, 0.10) 1px, transparent 1.4px),
+    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1.4px);
+  background-size: auto, auto, 5px 5px, 7px 7px;
+  background-position: 0 0, 0 0, 0 0, 3px 3px;
 }
 
-/* Aggressive Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
+h1, h2, h3, h4 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--bg-base);
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 229, 255, 0.3);
-  border-radius: var(--border-radius-sm);
+button, input, select, textarea {
+  font-family: inherit;
+  color: inherit;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
+/* Accessible, visible focus ring everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--marker);
+  outline-offset: 2px;
 }
 
-/* Global Container Utility */
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Sharp UI Panels */
-.glass-panel, .surface-panel {
-  background: var(--bg-surface);
-  border: var(--border-neon);
-  border-radius: var(--border-radius-md);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+/* Corkboard-flavoured scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-.surface-panel:hover {
-  border-color: var(--primary);
-  box-shadow: var(--glow-cyan);
+::-webkit-scrollbar-track {
+  background: var(--cork-deep);
 }
 
-/* Cyber Buttons */
+::-webkit-scrollbar-thumb {
+  background: var(--paper-warm);
+  border-radius: 6px;
+  border: 2px solid var(--cork-deep);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--marker);
+}
+
+/* ---------------------------------------------------------
+   Buttons — styled like a pinned tab: a small "pinhead" dot
+   sits inside the left edge of every button and link-button.
+   --------------------------------------------------------- */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.8rem 1.8rem;
+  gap: 0.5rem;
+  padding: 0.85rem 1.8rem 0.85rem 2.2rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-radius: var(--border-radius-sm);
-  border: none;
+  font-size: 0.98rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  font-size: 0.9rem;
-  text-decoration: none;
   position: relative;
-  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 .btn-primary {
-  background-color: var(--primary);
-  color: var(--text-dark);
-  box-shadow: var(--glow-cyan);
+  background: var(--pin-red);
+  color: var(--paper);
+  box-shadow: var(--shadow-card);
+}
+
+.btn-primary::before {
+  background: #e9cabf;
 }
 
 .btn-primary:hover {
-  background-color: #FFFFFF;
-  color: var(--text-dark);
-  box-shadow: var(--glow-cyan-strong);
+  background: var(--pin-red-dark);
   transform: translateY(-2px);
+  box-shadow: 0 14px 22px rgba(20, 14, 8, 0.4);
 }
 
 .btn-secondary {
-  background-color: transparent;
-  color: var(--primary);
-  border: 1px solid var(--primary);
+  background: var(--paper);
+  color: var(--ink);
+  border-color: rgba(43, 33, 24, 0.25);
+}
+
+.btn-secondary::before {
+  background: var(--sage);
 }
 
 .btn-secondary:hover {
-  background-color: rgba(0, 229, 255, 0.1);
-  box-shadow: var(--glow-cyan);
+  background: var(--paper-warm);
+  transform: translateY(-2px);
 }
 
-/* Dark Mode Inputs */
-.input-field {
-  width: 100%;
-  padding: 0.85rem 1.2rem;
-  background: var(--bg-surface-light);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-main);
-  border-radius: var(--border-radius-sm);
-  font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.input-field:focus {
-  outline: none;
-  border-color: var(--primary);
-  background: var(--bg-surface);
-  box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.2);
-}
-
-.input-field::placeholder {
-  color: var(--text-muted);
-}
-
-/* High-Contrast Tags */
-.badge {
-  display: inline-block;
-  padding: 0.3rem 0.8rem;
-  border-radius: 2px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.badge-cyan {
-  background-color: rgba(0, 229, 255, 0.1);
-  color: var(--primary);
-  border: 1px solid var(--primary);
-}
-
-.badge-pink {
-  background-color: rgba(255, 0, 85, 0.1);
-  color: var(--secondary);
-  border: 1px solid var(--secondary);
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

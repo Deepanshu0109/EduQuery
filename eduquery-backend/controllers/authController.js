@@ -1,8 +1,7 @@
-// controllers/authController.js
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 const User = require('../models/User');
-
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -28,7 +27,6 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: 'Please provide name, email and password.' });
     }
 
-    // NEW: Strict Password Constraints
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/;
     if (!passwordRegex.test(password)) {
       return res.status(400).json({ 
@@ -54,7 +52,6 @@ exports.register = async (req, res) => {
 
     await user.save();
 
-    // NEW: Error handling for fake/undeliverable emails
     try {
       await transporter.sendMail({
         from: process.env.EMAIL_USER,
@@ -65,7 +62,6 @@ exports.register = async (req, res) => {
       res.status(200).json({ message: 'OTP sent to email. Please verify.' });
     } catch (mailError) {
       console.error('Mail sending failed:', mailError);
-      // Delete the unverified user so they aren't stuck in the database
       if (!user.isVerified) {
         await User.deleteOne({ email: user.email });
       }
@@ -109,7 +105,6 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     
-    // NEW: Explicit Error Messages
     if (!user) return res.status(404).json({ message: 'This email is not registered.' });
     if (!user.isVerified) return res.status(403).json({ message: 'Please verify your email before logging in.' });
 
@@ -126,3 +121,64 @@ exports.login = async (req, res) => {
   }
 };
 
+exports.forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) return res.status(404).json({ message: 'If this email is registered, a reset link will be sent.' });
+
+    const resetToken = crypto.randomBytes(20).toString('hex');
+    
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = Date.now() + 15 * 60 * 1000;
+    await user.save();
+
+    const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: user.email,
+      subject: 'EduQuery - Password Reset Request',
+      text: `Hello ${user.name},\n\nYou requested a password reset. Click the link below to set a new password:\n\n${resetUrl}\n\nThis link will expire in 15 minutes.\n\nIf you didn't request this, you can safely ignore this email.`,
+    });
+
+    res.status(200).json({ message: 'Password reset link sent to email.' });
+  } catch (error) {
+    console.error('Forgot password error:', error);
+    res.status(500).json({ message: 'Server error sending reset link.' });
+  }
+};
+
+exports.resetPassword = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: 'Password reset token is invalid or has expired.' });
+    }
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/;
+    if (!passwordRegex.test(newPassword)) {
+      return res.status(400).json({ 
+        message: 'Password must be at least 8 characters long, include an uppercase letter, a number, and a special symbol.' 
+      });
+    }
+
+    user.password = newPassword; 
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    res.status(200).json({ message: 'Password has been reset successfully. You can now log in.' });
+  } catch (error) {
+    console.error('Reset password error:', error);
+    res.status(500).json({ message: 'Server error resetting password.' });
+  }
+};

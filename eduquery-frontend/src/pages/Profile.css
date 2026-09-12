@@ -1,184 +1,138 @@
-/* --- Profile Page Container --- */
+/* --- Profile page container --- */
 .profile-page {
-  padding: 3rem 2rem;
+  padding: 3rem 1.5rem;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  min-height: calc(100vh - 80px); /* Adjusting for potential headers */
-  animation: fadeIn 0.4s ease-out;
+  min-height: calc(100vh - 40px);
 }
 
-/* --- Profile Card --- */
+/* --- Profile card: a pinned library index card --- */
 .profile-card {
   width: 100%;
   max-width: 600px;
-  background: var(--bg-surface-light);
-  border: 1px solid rgba(0, 229, 255, 0.2);
-  border-radius: var(--border-radius-md);
-  padding: 3rem 2.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 229, 255, 0.05);
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 2.6rem 2.4rem;
+  box-shadow: var(--shadow-card);
   position: relative;
-}
-
-/* Techy top-left and bottom-right corner accents */
-.profile-card::before,
-.profile-card::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--primary);
-  transition: all 0.3s ease;
+  transform: rotate(-0.6deg);
 }
 
 .profile-card::before {
-  top: -2px;
-  left: -2px;
-  border-right: none;
-  border-bottom: none;
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 42px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e7776a, var(--pin-red-dark));
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
 }
 
-.profile-card::after {
-  bottom: -2px;
-  right: -2px;
-  border-left: none;
-  border-top: none;
-}
-
-.profile-card:hover::before,
-.profile-card:hover::after {
-  width: 30px;
-  height: 30px;
-  box-shadow: var(--glow-cyan);
-}
-
-/* --- Typography --- */
 .profile-card h1 {
-  font-size: 2rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--text-main);
-  text-shadow: var(--glow-cyan);
-  margin-bottom: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  padding-bottom: 1rem;
+  font-size: 1.9rem;
+  color: var(--ink);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 2px dashed var(--rule);
 }
 
-/* --- Status Message --- */
 .profile-message {
-  background: rgba(0, 255, 102, 0.1); /* Success green tint */
-  border-left: 3px solid var(--success);
-  color: var(--success);
-  padding: 1rem;
-  margin-bottom: 2rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
-  text-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
-  animation: slideIn 0.3s ease-out;
+  background: rgba(124, 145, 121, 0.16);
+  border-left: 3px solid var(--sage);
+  color: #3f5a3d;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.6rem;
+  font-size: 0.93rem;
+  border-radius: 0 3px 3px 0;
 }
 
-@keyframes slideIn {
-  from { opacity: 0; transform: translateX(-10px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-/* --- Form Elements --- */
+/* --- Form --- */
 .profile-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.3rem;
 }
 
-.form-group {
+.profile-form .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.35rem;
 }
 
-.form-group label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.profile-form .form-group label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink-soft);
 }
 
-.form-group input {
+.profile-form .form-group input {
   width: 100%;
-  padding: 0.9rem 1.2rem;
-  background: var(--bg-surface);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-main);
-  border-radius: var(--border-radius-sm);
-  font-family: 'Outfit', sans-serif;
+  padding: 0.6rem 0.1rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--rule);
   font-size: 1rem;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s ease;
 }
 
-.form-group input:focus {
+.profile-form .form-group input:focus {
   outline: none;
-  border-color: var(--primary);
-  background: var(--bg-base);
-  box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.1), 0 0 0 1px var(--primary);
+  border-bottom-color: var(--pin-red);
 }
 
-/* Disabled Inputs (Locked System look) */
-.form-group input:disabled {
-  background: rgba(255, 255, 255, 0.02);
-  color: #555566; /* Very dim text */
-  border: 1px dashed rgba(255, 255, 255, 0.1);
+.profile-form .form-group input:disabled {
+  color: var(--ink-soft);
+  border-bottom-style: dotted;
   cursor: not-allowed;
 }
 
-.form-group input:disabled:focus {
-  box-shadow: none;
-  border-color: rgba(255, 255, 255, 0.1);
+/* --- Save button --- */
+.save-btn {
+  margin-top: 1rem;
+  align-self: flex-start;
+  padding: 0.75rem 1.8rem 0.75rem 2.1rem;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.98rem;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-/* --- Submit Button --- */
-.save-btn {
-  margin-top: 1.5rem;
-  align-self: flex-start;
-  padding: 0.8rem 2rem;
-  background-color: transparent;
-  color: var(--primary);
-  border: 1px solid var(--primary);
-  border-radius: var(--border-radius-sm);
-  font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  overflow: hidden;
+.save-btn::before {
+  content: '';
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sage);
 }
 
 .save-btn:hover {
-  background-color: var(--primary);
-  color: var(--text-dark);
-  box-shadow: var(--glow-cyan-strong);
+  background: var(--pin-red-dark);
   transform: translateY(-2px);
 }
 
-.save-btn:active {
-  transform: translateY(1px);
-}
-
-/* --- Responsive Design --- */
+/* --- Responsive --- */
 @media (max-width: 768px) {
   .profile-page {
     padding: 2rem 1rem;
   }
-  
+
   .profile-card {
-    padding: 2rem 1.5rem;
+    padding: 2rem 1.4rem;
   }
-  
+
   .save-btn {
-    width: 100%; /* Full width button on mobile */
+    width: 100%;
   }
 }

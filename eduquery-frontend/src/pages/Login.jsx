@@ -46,7 +46,11 @@ const Login = () => {
           <button type="submit" className="auth-btn">Login</button>
         </form>
 
-        <p className="auth-footer">
+        <div className="auth-footer" style={{ marginTop: '1rem', marginBottom: '0.5rem' }}>
+          <Link to="/forgot-password" style={{ marginLeft: 0 }}>Forgot Password?</Link>
+        </div>
+
+        <p className="auth-footer" style={{ marginTop: '1rem' }}>
           Don't have an account? <Link to="/register">Register</Link>
         </p>
       </div>

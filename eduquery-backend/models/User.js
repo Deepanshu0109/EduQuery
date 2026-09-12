@@ -1,4 +1,3 @@
-// models/User.js
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -13,11 +12,12 @@ const userSchema = new mongoose.Schema({
   semester: { type: Number, min: 1, max: 8, default: 1 },
   rollNumber: { type: String, default: '' },
   createdAt: { type: Date, default: Date.now },
+  
+  // Password Reset Fields
+  resetPasswordToken: { type: String },
+  resetPasswordExpires: { type: Date },
 });
 
-// NEW: MongoDB TTL Index
-// This automatically deletes the document 15 minutes (900 seconds) after 'createdAt'
-// BUT ONLY IF 'isVerified' is false. If they verify, MongoDB ignores this rule.
 userSchema.index(
   { createdAt: 1 }, 
   { 

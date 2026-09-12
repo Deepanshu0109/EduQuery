@@ -1,201 +1,180 @@
-/* --- Authentication Page Container --- */
+/* --- Auth page container --- */
 .auth-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  background: radial-gradient(circle at center, rgba(0, 229, 255, 0.04) 0%, transparent 60%);
+  padding: 3rem 1.5rem;
 }
 
-/* --- The Cyber Card --- */
+/* --- The card is a pinned index card, very slightly tilted --- */
 .auth-card {
   width: 100%;
   max-width: 420px;
-  background: var(--bg-surface-light);
-  border: var(--border-neon);
-  border-radius: var(--border-radius-md);
-  padding: 3.5rem 2.5rem;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), var(--glow-cyan);
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 3.2rem 2.4rem 2.4rem;
   position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-card);
+  transform: rotate(-1deg);
 }
 
 .auth-card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: var(--primary);
-  box-shadow: var(--glow-cyan-strong);
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e7776a, var(--pin-red-dark));
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
 }
 
 /* --- Typography --- */
 .auth-title {
-  font-size: 2.2rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 3px;
+  font-size: 2rem;
   text-align: center;
-  margin-bottom: 2.5rem;
-  color: var(--text-main);
-  text-shadow: var(--glow-cyan);
+  color: var(--ink);
+  margin-bottom: 2rem;
 }
 
-/* --- Error Messages --- */
+/* --- Messages --- */
 .auth-error {
-  background: rgba(255, 0, 85, 0.1);
-  border-left: 3px solid var(--danger);
-  color: var(--danger);
+  background: rgba(168, 64, 47, 0.08);
+  border-left: 3px solid var(--pin-red);
+  color: var(--pin-red-dark);
   padding: 0.8rem 1rem;
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
-  font-weight: 500;
-  text-shadow: 0 0 5px rgba(255, 0, 85, 0.3);
-  animation: glitch 0.3s ease-in-out;
+  border-radius: 0 3px 3px 0;
 }
 
-@keyframes glitch {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-2px); }
-  40% { transform: translateX(2px); }
-  60% { transform: translateX(-2px); }
-  80% { transform: translateX(2px); }
-  100% { transform: translateX(0); }
+.auth-success {
+  background: rgba(124, 145, 121, 0.14);
+  border-left: 3px solid var(--sage);
+  color: #3f5a3d;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  border-radius: 0 3px 3px 0;
 }
 
-/* --- Form Fields --- */
+/* --- Form fields: fill-in-the-blank notebook lines --- */
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.4rem;
 }
 
 .auth-form input {
   width: 100%;
-  padding: 1rem 1.2rem;
-  background: var(--bg-surface);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-main);
-  border-radius: var(--border-radius-sm);
-  font-family: 'Outfit', sans-serif;
+  padding: 0.65rem 0.1rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--rule);
   font-size: 1rem;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s ease;
 }
 
 .auth-form input:focus {
   outline: none;
-  border-color: var(--primary);
-  background: var(--bg-base);
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--primary);
+  border-bottom-color: var(--pin-red);
 }
 
 .auth-form input::placeholder {
-  color: var(--text-muted);
-  font-weight: 300;
-  letter-spacing: 0.5px;
+  color: var(--ink-soft);
 }
 
-/* --- Submit Button --- */
+/* --- Submit button --- */
 .auth-btn {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: var(--primary);
-  color: var(--text-dark);
+  margin-top: 0.8rem;
+  padding: 0.9rem 1.5rem 0.9rem 2.2rem;
+  background: var(--ink);
+  color: var(--paper);
   border: none;
-  border-radius: var(--border-radius-sm);
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: var(--glow-cyan);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.auth-btn::before {
+  content: '';
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--marker);
 }
 
 .auth-btn:hover:not(:disabled) {
-  background-color: #FFFFFF;
-  box-shadow: var(--glow-cyan-strong);
-  transform: translateY(-3px);
+  background: var(--pin-red-dark);
+  transform: translateY(-2px);
 }
 
 .auth-btn:active:not(:disabled) {
-  transform: translateY(1px);
+  transform: translateY(0);
 }
 
 .auth-btn:disabled {
-  background-color: #555;
-  color: #888;
-  box-shadow: none;
+  background: var(--ink-soft);
   cursor: not-allowed;
 }
 
-/* --- Footer Links --- */
+/* --- Footer links --- */
 .auth-footer {
   margin-top: 2rem;
   text-align: center;
-  color: var(--text-muted);
+  color: var(--ink-soft);
   font-size: 0.95rem;
-  font-weight: 300;
 }
 
 .auth-footer a {
-  color: var(--primary);
-  text-decoration: none;
+  color: var(--pin-red-dark);
   font-weight: 700;
-  margin-left: 0.5rem;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
+  margin-left: 0.4rem;
 }
 
 .auth-footer a:hover {
-  color: #FFFFFF;
-  text-shadow: var(--glow-cyan);
-}
-
-
-
-.auth-success {
-  background: rgba(76, 175, 80, 0.1);
-  border-left: 3px solid #4caf50;
-  color: #4caf50;
-  padding: 0.8rem 1rem;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-  font-weight: 500;
+  text-decoration: underline;
 }
 
 .google-btn-wrapper {
-  margin: 20px 0;
+  margin: 1.2rem 0;
   display: flex;
   justify-content: center;
 }
 
+/* --- OTP step --- */
 .otp-verification-container {
   display: flex;
   flex-direction: column;
 }
 
 .email-display {
-  color: #ccc;
+  color: var(--ink-soft);
   font-size: 0.9rem;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.3rem;
 }
 
 .email-display strong {
-  color: #fff;
-  font-size: 1rem;
+  color: var(--ink);
+  font-size: 1.05rem;
   display: block;
-  margin-top: 5px;
+  margin-top: 0.4rem;
+  font-family: 'Fraunces', serif;
 }
 
 .resend-btn-wrapper {
-  margin-top: 20px;
+  margin-top: 1.2rem;
   text-align: center;
 }
 
@@ -203,36 +182,34 @@
   background: none;
   border: none;
   font-size: 0.9rem;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
-  font-family: inherit;
 }
 
 .text-btn.active {
-  color: #4caf50;
+  color: #3f5a3d;
   text-decoration: underline;
 }
 
 .text-btn.disabled {
-  color: #888;
+  color: var(--ink-soft);
   cursor: not-allowed;
   text-decoration: none;
 }
 
 .secondary-btn {
-  margin-top: 15px;
+  margin-top: 1rem;
   background: transparent;
-  border: 1px solid #555;
-  color: #aaa;
-  padding: 10px;
-  border-radius: var(--border-radius-sm);
+  border: 2px dashed var(--rule);
+  color: var(--ink-soft);
+  padding: 0.65rem;
+  border-radius: 6px;
   cursor: pointer;
   width: 100%;
-  font-family: inherit;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .secondary-btn:hover {
-  color: #fff;
-  border-color: #888;
+  border-color: var(--ink-soft);
+  color: var(--ink);
 }

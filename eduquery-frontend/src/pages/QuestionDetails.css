@@ -1,257 +1,261 @@
-/* --- Page Container --- */
+/* --- Page container --- */
 .question-page {
-  padding: 3rem 2.5rem;
-  max-width: 1000px;
+  padding: 3rem clamp(1rem, 4vw, 2.5rem) 3rem;
+  max-width: 900px;
   margin: 0 auto;
-  animation: fadeIn 0.4s ease-out;
 }
 
-/* --- Main Question Card --- */
-.question-card {
-  background: var(--bg-surface-light);
-  border: 1px solid rgba(0, 229, 255, 0.3);
-  border-radius: var(--border-radius-md);
-  padding: 2.5rem 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 229, 255, 0.05);
-  margin-bottom: 3rem;
+/* --- The question itself: the master card pinned at the top of the thread --- */
+.question-page .question-card {
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 2.2rem 2rem;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 2.6rem;
   position: relative;
+  transform: rotate(-0.4deg);
 }
 
-/* Cyber accent at top-left */
-.question-card::before {
+.question-page .question-card::before {
   content: '';
   position: absolute;
-  top: -2px;
-  left: -2px;
-  width: 40px;
-  height: 40px;
-  border-top: 3px solid var(--primary);
-  border-left: 3px solid var(--primary);
-  box-shadow: -5px -5px 15px rgba(0, 229, 255, 0.2);
+  top: -14px;
+  left: 36px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e7776a, var(--pin-red-dark));
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
 }
 
-.question-card h2 {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--text-main);
-  text-shadow: var(--glow-cyan);
-  margin-bottom: 1.5rem;
-  letter-spacing: 1px;
+.question-page .question-card h2 {
+  font-size: 1.8rem;
+  color: var(--ink);
+  margin-bottom: 1.2rem;
 }
 
 .question-body {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   line-height: 1.8;
-  color: #E2E8F0;
-  margin-bottom: 1.5rem;
-  white-space: pre-wrap; /* Keeps formatting of the text */
+  color: var(--ink);
+  margin-bottom: 1.3rem;
+  white-space: pre-wrap;
 }
 
-.question-body span, .answer-card p span {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+.question-body span,
+.answer-card p span {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
   font-style: italic;
 }
 
 .question-meta {
-  font-size: 0.9rem;
-  color: var(--secondary); /* Neon Pink for meta info */
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-weight: 700;
+  border-top: 1px dashed var(--rule);
   padding-top: 1rem;
 }
 
-/* --- Action Buttons (Edit/Delete) --- */
-.question-actions, .answer-actions {
+/* --- Action buttons: quiet outline pills --- */
+.question-actions,
+.answer-actions {
   display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: 0.8rem;
+  margin-top: 1.3rem;
   flex-wrap: wrap;
 }
 
-.question-actions button, .answer-actions button, .answer-card > div > button {
+.question-actions button,
+.answer-actions button,
+.answer-card > div > button {
   background: transparent;
-  color: var(--primary);
-  border: 1px solid var(--primary);
-  padding: 0.5rem 1rem;
-  border-radius: var(--border-radius-sm);
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.85rem;
+  color: var(--ink);
+  border: 2px solid var(--rule);
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.question-actions button:hover, .answer-actions button:hover, .answer-card > div > button:hover {
-  background: rgba(0, 229, 255, 0.1);
-  box-shadow: var(--glow-cyan);
-  transform: translateY(-2px);
+.question-actions button:hover,
+.answer-actions button:hover,
+.answer-card > div > button:hover {
+  border-color: var(--ink);
+  background: var(--paper-warm);
 }
 
-/* Danger / Delete Button */
-.question-actions .delete-btn, .answer-actions .delete-btn {
-  color: var(--danger);
-  border-color: var(--danger);
+.question-actions .delete-btn,
+.answer-actions .delete-btn {
+  color: var(--pin-red-dark);
+  border-color: rgba(168, 64, 47, 0.4);
 }
 
-.question-actions .delete-btn:hover, .answer-actions .delete-btn:hover {
-  background: rgba(255, 0, 85, 0.1);
-  box-shadow: var(--glow-pink);
+.question-actions .delete-btn:hover,
+.answer-actions .delete-btn:hover {
+  background: rgba(168, 64, 47, 0.1);
+  border-color: var(--pin-red-dark);
 }
 
-/* --- Answers Section --- */
+/* --- Answers heading --- */
 .question-page > h3 {
-  font-size: 1.5rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--text-main);
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
+  font-size: 1.4rem;
+  color: var(--paper);
+  margin-bottom: 1.3rem;
 }
 
-.question-page > h3::before {
-  content: '';
-  display: block;
-  width: 15px;
-  height: 15px;
-  background: var(--secondary);
-  box-shadow: var(--glow-pink);
-}
-
+/* --- Answers list: a stack of notes strung down the board --- */
 .answers-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 3rem;
+  gap: 1.3rem;
+  margin-bottom: 2.6rem;
+  position: relative;
+  padding-left: 1.2rem;
 }
 
-/* --- Individual Answer Card --- */
+.answers-list::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: repeating-linear-gradient(var(--paper-warm) 0 6px, transparent 6px 12px);
+  opacity: 0.4;
+}
+
 .answer-card {
-  background: var(--bg-surface);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-left: 3px solid var(--secondary); /* Pink left border for answers */
-  border-radius: var(--border-radius-sm);
-  padding: 1.8rem;
+  background: var(--paper-warm);
+  border-radius: 3px;
+  padding: 1.5rem 1.6rem;
   position: relative;
-  transition: all 0.3s ease;
+  box-shadow: 0 6px 14px rgba(20, 14, 8, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.answer-card:nth-child(odd) {
+  transform: rotate(-0.5deg);
+}
+
+.answer-card:nth-child(even) {
+  transform: rotate(0.5deg);
 }
 
 .answer-card:hover {
-  background: var(--bg-surface-light);
-  border-color: rgba(255, 0, 85, 0.2);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.4), var(--glow-pink);
+  transform: rotate(0deg);
+  box-shadow: 0 10px 20px rgba(20, 14, 8, 0.3);
 }
 
 .answer-card p {
-  font-size: 1.05rem;
+  font-size: 1rem;
   line-height: 1.7;
-  color: #D1D5DB;
-  margin-bottom: 1rem;
+  color: var(--ink);
+  margin-bottom: 0.8rem;
   white-space: pre-wrap;
 }
 
 .answer-card small {
   display: block;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  font-weight: 700;
+  margin-bottom: 0.8rem;
 }
 
-/* --- Edit Answer Textarea --- */
 .answer-card textarea {
   width: 100%;
   min-height: 100px;
-  padding: 1rem;
-  background: var(--bg-base);
-  border: 1px solid var(--primary);
-  color: var(--text-main);
-  border-radius: var(--border-radius-sm);
-  font-family: 'Outfit', sans-serif;
-  margin-bottom: 1rem;
+  padding: 0.9rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  border-radius: 4px;
+  margin-bottom: 0.9rem;
   resize: vertical;
+  transition: border-color 0.2s ease;
 }
 
 .answer-card textarea:focus {
   outline: none;
-  box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.1), var(--glow-cyan);
+  border-color: var(--pin-red);
 }
 
-/* --- Post New Answer Form --- */
+/* --- New answer form: a fresh blank card at the end of the thread --- */
 .answer-form-card {
-  background: var(--bg-surface-light);
-  border: 1px dashed rgba(0, 229, 255, 0.3);
-  border-radius: var(--border-radius-md);
-  padding: 2rem;
-  transition: border-color 0.3s ease;
+  background: var(--paper);
+  border: 2px dashed var(--rule);
+  border-radius: 4px;
+  padding: 1.8rem;
+  transition: border-color 0.2s ease;
 }
 
 .answer-form-card:focus-within {
-  border-color: var(--primary);
+  border-color: var(--pin-red);
   border-style: solid;
-  box-shadow: var(--glow-cyan);
 }
 
 .answer-form-card textarea {
   width: 100%;
-  min-height: 120px;
-  padding: 1.2rem;
-  background: var(--bg-surface);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-main);
-  border-radius: var(--border-radius-sm);
-  font-family: 'Outfit', sans-serif;
+  min-height: 110px;
+  padding: 1rem;
+  background: var(--paper-warm);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  border-radius: 4px;
   font-size: 1rem;
   resize: vertical;
   margin-bottom: 1rem;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s ease;
 }
 
 .answer-form-card textarea:focus {
   outline: none;
-  border-color: var(--primary);
-  background: var(--bg-base);
+  border-color: var(--pin-red);
 }
 
 .answer-form-card button {
-  background-color: var(--primary);
-  color: var(--text-dark);
+  background: var(--ink);
+  color: var(--paper);
   border: none;
-  padding: 1rem 2rem;
-  border-radius: var(--border-radius-sm);
-  font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  padding: 0.85rem 1.8rem 0.85rem 2.2rem;
+  border-radius: 999px;
+  font-size: 0.98rem;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: var(--glow-cyan);
-  transition: all 0.3s ease;
+  position: relative;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.answer-form-card button::before {
+  content: '';
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--marker);
 }
 
 .answer-form-card button:hover {
-  background-color: #FFFFFF;
-  box-shadow: var(--glow-cyan-strong);
+  background: var(--pin-red-dark);
   transform: translateY(-2px);
 }
 
-/* --- Responsive Design --- */
+/* --- Responsive --- */
 @media (max-width: 768px) {
   .question-page {
     padding: 2rem 1rem;
   }
-  
-  .question-card, .answer-card, .answer-form-card {
+
+  .question-page .question-card,
+  .answer-card,
+  .answer-form-card {
     padding: 1.5rem;
   }
 }

@@ -1,206 +1,217 @@
-/* --- Page Container --- */
+/* --- Page container --- */
 .ask-doubt-page {
-  padding: 3rem 2rem;
+  padding: 3rem 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 80px);
-  animation: fadeIn 0.5s ease-out;
+  min-height: calc(100vh - 40px);
 }
 
-/* --- Two-Column Layout --- */
+/* --- Two-column layout --- */
 .ask-doubt-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 4rem;
+  gap: 3.5rem;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1150px;
 }
 
-/* --- Form Card (The Terminal) --- */
+/* --- The form card: a pinned index card --- */
 .ask-doubt-card {
   flex: 1;
-  max-width: 650px;
-  background: var(--bg-surface-light);
-  border: 1px solid rgba(0, 229, 255, 0.2);
-  border-radius: var(--border-radius-md);
-  padding: 3rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 229, 255, 0.05);
+  max-width: 640px;
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 2.6rem;
+  box-shadow: var(--shadow-card);
   position: relative;
+  transform: rotate(-0.5deg);
 }
 
-/* Cyber Accent Line at the Top */
 .ask-doubt-card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: var(--primary);
-  box-shadow: var(--glow-cyan-strong);
+  top: -14px;
+  left: 40px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e7776a, var(--pin-red-dark));
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
 }
 
-/* --- Typography --- */
 .ask-doubt-title {
-  font-size: 2.2rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--text-main);
-  text-shadow: var(--glow-cyan);
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 1.9rem;
+  color: var(--ink);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 2px dashed var(--rule);
 }
 
-/* --- Error Message --- */
 .ask-doubt-error {
-  background: rgba(255, 0, 85, 0.1);
-  border-left: 3px solid var(--danger);
-  color: var(--danger);
-  padding: 1rem;
-  margin-bottom: 2rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  text-shadow: 0 0 5px rgba(255, 0, 85, 0.3);
-  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
-  animation: glitch 0.3s ease-in-out;
+  background: rgba(168, 64, 47, 0.08);
+  border-left: 3px solid var(--pin-red);
+  color: var(--pin-red-dark);
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.6rem;
+  font-size: 0.92rem;
+  border-radius: 0 3px 3px 0;
 }
 
-/* --- Form Fields --- */
+/* --- Form fields --- */
 .ask-doubt-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.3rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.4rem;
 }
 
 .form-group label {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  color: var(--ink-soft);
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
+.ask-doubt-form .form-group input,
+.ask-doubt-form .form-group select {
   width: 100%;
-  padding: 1rem 1.2rem;
-  background: var(--bg-surface);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-main);
-  border-radius: var(--border-radius-sm);
-  font-family: 'Outfit', sans-serif;
+  padding: 0.65rem 0.2rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--rule);
   font-size: 1rem;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s ease;
 }
 
-.form-group textarea {
+/* Textarea reads like a lined notebook page */
+.ask-doubt-form .form-group textarea {
+  width: 100%;
   min-height: 150px;
-  resize: vertical; /* Allow vertical resizing only */
-  line-height: 1.6;
+  padding: 0.9rem 1rem;
+  resize: vertical;
+  line-height: 27px;
+  font-size: 1rem;
+  color: var(--ink);
+  background-color: var(--paper-warm);
+  background-image: repeating-linear-gradient(var(--paper-warm) 0 26px, var(--rule) 26px 27px);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
 }
 
-.form-group select {
+.ask-doubt-form .form-group select {
   cursor: pointer;
-  appearance: none; /* Removes default browser styling for a cleaner look */
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300E5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232b2118' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
-  background-position: right 1rem center;
+  background-position: right 0.2rem center;
   background-size: 1em;
 }
 
-.form-group select option {
-  background-color: var(--bg-surface-light);
-  color: var(--text-main);
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+.ask-doubt-form .form-group input:focus,
+.ask-doubt-form .form-group select:focus {
   outline: none;
-  border-color: var(--primary);
-  background: var(--bg-base);
-  box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.1), 0 0 0 1px var(--primary);
+  border-bottom-color: var(--pin-red);
 }
 
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: var(--text-muted);
-  opacity: 0.5;
+.ask-doubt-form .form-group textarea:focus {
+  outline: none;
+  border-color: var(--pin-red);
 }
 
-/* --- Submit Button --- */
+.ask-doubt-form .form-group input::placeholder,
+.ask-doubt-form .form-group textarea::placeholder {
+  color: var(--ink-soft);
+  opacity: 0.7;
+}
+
+/* --- Submit button --- */
 .ask-doubt-btn {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: var(--primary);
-  color: var(--text-dark);
+  margin-top: 0.6rem;
+  align-self: flex-start;
+  padding: 0.9rem 1.8rem 0.9rem 2.2rem;
+  background: var(--ink);
+  color: var(--paper);
   border: none;
-  border-radius: var(--border-radius-sm);
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: var(--glow-cyan);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.ask-doubt-btn::before {
+  content: '';
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--marker);
 }
 
 .ask-doubt-btn:hover {
-  background-color: #FFFFFF;
-  box-shadow: var(--glow-cyan-strong);
-  transform: translateY(-3px);
+  background: var(--pin-red-dark);
+  transform: translateY(-2px);
 }
 
-/* --- Illustration Area --- */
+/* --- Illustration: pinned like a photograph --- */
 .ask-doubt-image {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.ask-doubt-image::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e7776a, var(--pin-red-dark));
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+  z-index: 2;
 }
 
 .ask-doubt-image img {
   width: 100%;
-  max-width: 450px;
-  border-radius: var(--border-radius-md);
-  filter: drop-shadow(0 0 30px rgba(0, 229, 255, 0.2));
-  animation: floatIllustration 6s ease-in-out infinite;
+  max-width: 400px;
+  border: 10px solid var(--paper);
+  border-radius: 2px;
+  box-shadow: var(--shadow-card);
+  transform: rotate(2deg);
 }
 
-@keyframes floatIllustration {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
-}
-
-/* --- Responsive Design --- */
+/* --- Responsive --- */
 @media (max-width: 992px) {
   .ask-doubt-container {
-    flex-direction: column-reverse; /* Put image on top of form on smaller screens */
+    flex-direction: column-reverse;
     gap: 2rem;
   }
 
   .ask-doubt-image img {
-    max-width: 300px; /* Make image smaller on tablets/phones */
+    max-width: 280px;
   }
 }
 
 @media (max-width: 768px) {
   .ask-doubt-page {
-    padding: 1rem;
+    padding: 1.5rem 1rem;
   }
 
   .ask-doubt-card {

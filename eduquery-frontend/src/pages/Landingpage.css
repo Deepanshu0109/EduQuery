@@ -1,68 +1,58 @@
-/* --- Landing Page Container --- */
+/* --- Landing page container (background comes from body) --- */
 .landing-page {
   width: 100%;
   overflow-x: hidden;
   position: relative;
-  /* Background index.css se aayega */
 }
 
-/* --- Typography & Global Sections --- */
 section {
-  padding: 6rem 10%;
+  padding: 6rem 8%;
   position: relative;
   z-index: 1;
 }
 
 section h2 {
   text-align: center;
-  font-size: 3rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 4rem;
-  color: var(--text-main);
-  text-shadow: var(--glow-cyan);
+  font-size: 2.4rem;
+  color: var(--paper);
+  margin-bottom: 3rem;
 }
 
-/* --- Hero Section --- */
+/* --- Hero: the big pinned notice on the board --- */
 .hero-section {
-  min-height: 90vh;
+  min-height: 88vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 3rem;
-  padding-top: 8rem;
+  padding-top: 7rem;
 }
 
 .hero-content {
   flex: 1;
-  max-width: 650px;
+  max-width: 600px;
 }
 
-/* Hollow text effect for the main title */
 .hero-title {
-  font-size: 5rem;
-  font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--primary);
-  text-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
-  letter-spacing: 2px;
+  font-size: 4.2rem;
+  line-height: 1.05;
+  color: var(--paper);
+  margin-bottom: 1.2rem;
 }
 
 .hero-tagline {
-  font-size: 1.25rem;
-  color: var(--text-muted);
-  margin-bottom: 3rem;
-  font-weight: 300;
-  letter-spacing: 1px;
+  font-size: 1.2rem;
+  color: var(--paper-warm);
+  opacity: 0.85;
+  margin-bottom: 2.2rem;
   line-height: 1.6;
+  max-width: 480px;
 }
 
 .hero-buttons {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.2rem;
+  flex-wrap: wrap;
 }
 
 .hero-image {
@@ -73,167 +63,178 @@ section h2 {
   position: relative;
 }
 
-/* Hover and Float Effect for the Image */
-.hero-image img {
-  width: 100%;
-  max-width: 550px;
-  border: var(--border-neon);
-  border-radius: var(--border-radius-sm);
-  box-shadow: var(--glow-cyan-strong);
-  animation: cyberFloat 6s ease-in-out infinite;
-  /* Ek slight dark filter taaki bright images dark theme mein chubein nahi */
-  filter: brightness(0.9) contrast(1.1); 
-}
-
-@keyframes cyberFloat {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { 
-    transform: translateY(-15px) rotate(1.5deg); 
-    box-shadow: var(--glow-pink); 
-    border-color: rgba(255, 0, 85, 0.5); 
-  }
-}
-
-/* --- Why EduQuery Cards --- */
-.why-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.5rem;
-}
-
-.card {
-  background: var(--bg-surface-light);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: var(--border-radius-sm);
-  padding: 3rem 2rem;
-  text-align: center;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Top border glowing animation on hover */
-.card::before {
+.hero-image::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e7776a, var(--pin-red-dark));
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
+
+.hero-image img {
   width: 100%;
-  height: 2px;
-  background: var(--primary);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
+  max-width: 520px;
+  border: 10px solid var(--paper);
+  border-radius: 2px;
+  box-shadow: 0 20px 40px rgba(10, 7, 4, 0.5);
+  transform: rotate(-2deg);
 }
 
-.card:hover {
-  transform: translateY(-10px);
-  border-color: rgba(0, 229, 255, 0.2);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), var(--glow-cyan);
+/* --- Why EduQuery: three pinned index cards, each tilted differently --- */
+.why-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.6rem;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.card:hover::before {
-  transform: scaleX(1);
+.why-cards .card {
+  background: var(--paper);
+  border-radius: 3px;
+  padding: 2.4rem 1.8rem 2rem;
+  text-align: left;
+  position: relative;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.card h3 {
-  font-size: 1.5rem;
-  color: var(--primary);
-  margin-bottom: 1rem;
-  font-weight: 700;
-  letter-spacing: 1px;
+.why-cards .card::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e7776a, var(--pin-red-dark));
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.35);
 }
 
-.card p {
-  color: var(--text-muted);
-  font-weight: 300;
+.why-cards .card:nth-child(1) {
+  transform: rotate(-1.6deg);
 }
 
-/* --- About Section --- */
+.why-cards .card:nth-child(2) {
+  transform: rotate(1.1deg);
+}
+
+.why-cards .card:nth-child(3) {
+  transform: rotate(-0.8deg);
+}
+
+.why-cards .card:hover {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: 0 20px 30px rgba(20, 14, 8, 0.4);
+}
+
+.why-cards .card h3 {
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 0.7rem;
+}
+
+.why-cards .card p {
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* --- About: read straight off the board, marked with a marker-line --- */
 .about-section {
-  background: var(--bg-surface);
-  border-top: var(--border-neon);
-  border-bottom: 1px solid rgba(255, 0, 85, 0.3); /* Neon Pink border neeche ki taraf */
-  box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
-  margin: 4rem 0;
+  max-width: 760px;
+  margin: 2rem auto;
+  padding: 2.6rem 2.2rem;
+  border-left: 4px solid var(--marker);
+  background: rgba(246, 239, 220, 0.05);
 }
 
 .about-section p {
-  max-width: 800px;
-  margin: 0 auto;
-  font-size: 1.25rem;
-  color: var(--text-main);
+  font-size: 1.15rem;
   line-height: 1.8;
-  text-align: center;
-  font-weight: 300;
+  color: var(--paper-warm);
 }
 
-/* --- Workflow Steps --- */
+/* --- How it works: a genuine sequence, so numbering earns its place --- */
 .workflow-steps {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 3.5rem;
-  margin-top: 5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 3.2rem;
+  margin-top: 3rem;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.workflow-steps::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--paper-warm) 0 10px, transparent 10px 20px);
+  opacity: 0.3;
+  z-index: 0;
 }
 
 .step {
-  background: var(--bg-surface);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 3.5rem 2rem 2.5rem;
+  background: var(--paper);
+  border-radius: 3px;
+  padding: 2.6rem 1.8rem 2rem;
   text-align: center;
   position: relative;
-  border-radius: var(--border-radius-sm);
-  transition: border-color 0.3s ease;
-}
-
-.step:hover {
-  border-color: rgba(255, 0, 85, 0.3);
+  box-shadow: var(--shadow-card);
+  z-index: 1;
 }
 
 .step-number {
   position: absolute;
-  top: -30px;
+  top: -22px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--bg-base);
-  color: var(--secondary); /* Neon Pink text */
-  border: 2px solid var(--secondary);
-  width: 60px;
-  height: 60px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--pin-red);
+  color: var(--paper);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
-  font-weight: 900;
-  border-radius: 4px; /* Boxy, sharp shape */
-  box-shadow: var(--glow-pink);
-  text-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
 }
 
 .step h3 {
-  color: var(--text-main);
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin: 0.8rem 0 0.6rem;
 }
 
 .step p {
-  color: var(--text-muted);
+  color: var(--ink-soft);
+  line-height: 1.6;
 }
 
 /* --- Footer --- */
 .landing-footer {
   text-align: center;
-  padding: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  color: var(--text-muted);
+  padding: 2.2rem;
+  border-top: 2px dashed rgba(246, 239, 220, 0.2);
+  color: var(--paper-warm);
+  opacity: 0.7;
   font-size: 0.9rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
 }
 
-/* --- Responsive Design --- */
+/* --- Responsive --- */
 @media (max-width: 992px) {
   .hero-section {
     flex-direction: column;
@@ -241,26 +242,42 @@ section h2 {
     padding-top: 6rem;
   }
 
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-tagline {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .hero-title {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
   }
 
   .hero-buttons {
     justify-content: center;
   }
+
+  .workflow-steps::before {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
   section {
-    padding: 4rem 5%;
+    padding: 4rem 6%;
   }
 
   .hero-title {
-    font-size: 2.8rem;
-    -webkit-text-stroke: 1px var(--primary);
+    font-size: 2.6rem;
   }
 
   section h2 {
-    font-size: 2.2rem;
+    font-size: 2rem;
+  }
+
+  .about-section {
+    padding: 2rem 1.4rem;
   }
 }
